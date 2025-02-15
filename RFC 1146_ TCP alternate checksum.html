@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)https://www.rfc-editor.org/rfc/rfc1146.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="robots" content="index,follow">
+    <meta name="creator" content="rfchandler version 0.2">
+      <meta name="citation_author" content="J. Zweig">
+      <meta name="citation_author" content="C. Partridge">
+      <meta name="citation_publication_date" content="March, 1990">
+      <meta name="citation_title" content=" TCP alternate checksum options ">
+      <meta name="citation_doi" content="10.17487/RFC1146">
+      <meta name="citation_issn" content="2070-1721">
+      <meta name="citation_technical_report_number" content="rfc1146">
+      <meta name="citation_pdf_url" content="https://www.rfc-editor.org/rfc/pdfrfc/rfc1146.txt.pdf">
+<title>RFC 1146:  TCP alternate checksum options </title>    
+        
+
+        <style type="text/css">
+	@media only screen 
+	  and (min-width: 992px)
+	  and (max-width: 1199px) {
+	    body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 768px)
+	  and (max-width: 991px) {
+            body { font-size: 14pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-width: 480px)
+	  and (max-width: 767px) {
+            body { font-size: 11pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (max-width: 479px) {
+            body { font-size: 8pt; }
+            div.content { width: 96ex; margin: 0 auto; }
+        }
+	@media only screen 
+	  and (min-device-width : 375px) 
+	  and (max-device-width : 667px) {
+            body { font-size: 9.5pt; }
+            div.content { width: 96ex; margin: 0; }
+        }
+	@media only screen 
+	  and (min-device-width: 1200px) {
+            body { font-size: 10pt; margin: 0 4em; }
+            div.content { width: 96ex; margin: 0; }
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+           /* line-height: 0pt; */
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+    <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]-->    <script type="text/javascript"><!--
+    function addHeaderTags() {
+        var spans = document.getElementsByTagName("span");
+        for (var i=0; i < spans.length; i++) {
+            var elem = spans[i];
+            if (elem) {
+                var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";               
+                }
+            }
+        }
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script></head>
+<body>
+<span class="pre noprint docinfo">[<a href="https://www.rfc-editor.org/" title="RFC Editor">RFC Home</a>] [<a href="https://www.rfc-editor.org/rfc/rfc1146.txt">TEXT</a>|<a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc1146.txt.pdf">PDF</a>|<a href="https://www.rfc-editor.org/rfc/rfc1146.html">HTML</a>] [<a href="https://datatracker.ietf.org/doc/rfc1146" title="IETF Datatracker information for this document">Tracker</a>] [<a href="https://datatracker.ietf.org/ipr/search/?rfc=1146&amp;submit=rfc" title="IPR disclosures related to this document">IPR</a>] [<a href="https://www.rfc-editor.org/info/rfc1146" title="Info page">Info page</a>]                  </span><br><span class="pre noprint docinfo">                                                                        </span><br><span class="pre noprint docinfo">Obsoleted by: <a href="https://www.rfc-editor.org/rfc/rfc6247" target="_blank">6247</a>                                              HISTORIC</span><br><span class="pre noprint docinfo">                                                                        </span><pre>Network Working Group                                          J. Zweig
+Request for Comments: 1146                                         UIUC
+Obsoletes: RFC <a href="https://www.rfc-editor.org/rfc/rfc1145">1145</a>                                        C. Partridge
+                                                                    BBN
+                                                             March 1990
+
+
+                     <span class="h1">TCP Alternate Checksum Options</span>
+
+Status of This Memo
+
+   This memo suggests a pair of TCP options to allow use of alternate
+   data checksum algorithms in the TCP header.  The use of these options
+   is experimental, and not recommended for production use.
+
+   Note:  This RFC corrects errors introduced in the editing process in
+   <a href="https://www.rfc-editor.org/rfc/rfc1145">RFC 1145</a>.
+
+   Distribution of this memo is unlimited.
+
+Introduction
+
+   Some members of the networking community have expressed interest in
+   using checksum-algorithms with different error detection and
+   correction properties than the standard TCP checksum.  The option
+   described in this memo provides a mechanism to negotiate the use of
+   an alternate checksum at connection-establishment time, as well as a
+   mechanism to carry additional checksum information for algorithms
+   that utilize checksums that are longer than 16 bits.
+
+Definition of the Options
+
+   The TCP Alternate Checksum Request Option may be sent in a SYN
+   segment by a TCP to indicate that the TCP is prepared to both
+   generate and receive checksums based on an alternate algorithm.
+   During communication, the alternate checksum replaces the regular TCP
+   checksum in the checksum field of the TCP header.  Should the
+   alternate checksum require more than 2 octets to transmit, the
+   checksum may either be moved into a TCP Alternate Checksum Data
+   Option and the checksum field of the TCP header be sent as 0, or the
+   data may be split between the header field and the option.  Alternate
+   checksums are computed over the same data as the regular TCP checksum
+   (see TCP Alternate Checksum Data Option discussion below).
+
+TCP Alternate Checksum Request Option
+
+   The format of the TCP Alternate Checksum Request Option is:
+
+
+
+
+<span class="grey">Zweig &amp; Partridge                                               [Page 1]</span></pre>
+<hr class="noprint"><!--NewPage--><pre class="newpage"><span id="page-2"></span>
+<span class="grey"><a href="https://www.rfc-editor.org/rfc/rfc1146">RFC 1146</a>             TCP Alternate Checksum Options           March 1990</span>
+
+
+                 +----------+----------+----------+
+                 |  Kind=14 | Length=3 |  chksum  |
+                 +----------+----------+----------+
+
+   Here chksum is a number identifying the type of checksum to be used.
+
+   The currently defined values of chksum are:
+
+                   0  -- TCP checksum
+                   1  -- 8-bit  Fletcher's algorithm (see <a href="https://www.rfc-editor.org/rfc/rfc1146.html#appendix-I">Appendix I</a>)
+                   2  -- 16-bit Fletcher's algorithm (see <a href="https://www.rfc-editor.org/rfc/rfc1146.html#appendix-I">Appendix I</a>I)
+
+   Note that the 8-bit Fletcher algorithm gives a 16-bit checksum and
+   the 16-bit algorithm gives a 32-bit checksum.
+
+   Alternate checksum negotiation proceeds as follows:
+
+      A SYN segment used to originate a connection may contain the
+      Alternate Checksum Request Option, which specifies an alternate
+      checksum-calculation algorithm to be used for the connection.  The
+      acknowledging SYN-ACK segment may also carry the option.
+
+      If both SYN segments carry the Alternate Checksum Request option,
+      and both specify the same algorithm, that algorithm must be used
+      for the remainder of the connection.  Otherwise, the standard TCP
+      checksum algorithm must be used for the entire connection.  Thus,
+      for example, if one TCP specifies type 1 checksums, and the other
+      specifies type 2 checksums, then they will use type 0 (the regular
+      TCP checksum).  Note that in practice, one TCP will typically be
+      responding to the other's SYN, and thus either accepting or
+      rejecting the proposed alternate checksum algorithm.
+
+      Any segment with the SYN bit set must always use the standard TCP
+      checksum algorithm.  Thus the SYN segment will always be
+      understood by the receiving TCP.  The alternate checksum must not
+      be used until the first non-SYN segment.  In addition, because RST
+      segments may also be received or sent without complete state
+      information, any segment with the RST bit set must use the
+      standard TCP checksum.
+
+      The option may not be sent in any segment that does not have the
+      SYN bit set.
+
+      An implementation of TCP which does not support the option should
+      silently ignore it (as <a href="https://www.rfc-editor.org/rfc/rfc1122">RFC 1122</a> requires).  Ignoring the option
+      will force any TCP attempting to use an alternate checksum to use
+      the standard TCP checksum algorithm, thus ensuring
+      interoperability.
+
+
+
+<span class="grey">Zweig &amp; Partridge                                               [Page 2]</span></pre>
+<hr class="noprint"><!--NewPage--><pre class="newpage"><span id="page-3"></span>
+<span class="grey"><a href="https://www.rfc-editor.org/rfc/rfc1146">RFC 1146</a>             TCP Alternate Checksum Options           March 1990</span>
+
+
+TCP Alternate Checksum Data Option
+
+   The format of the TCP Alternate Checksum Data Option is:
+
+                +---------+---------+---------+     +---------+
+                | Kind=15 |Length=N |  data   | ... |  data   |
+                +---------+---------+---------+     +---------+
+
+   This field is used only when the alternate checksum that is
+   negotiated is longer than 16 bits.  These checksums will not fit in
+   the checksum field of the TCP header and thus at least part of them
+   must be put in an option.  Whether the checksum is split between the
+   checksum field in the TCP header and the option or the entire
+   checksum is placed in the option is determined on a checksum by
+   checksum basis.
+
+   The length of this option will depend on the choice of alternate
+   checksum algorithm for this connection.
+
+   While computing the alternate checksum, the TCP checksum field and
+   the data portion TCP Alternate Checksum Data Option are replaced with
+   zeros.
+
+   An otherwise acceptable segment carrying this option on a connection
+   using a 16-bit checksum algorithm, or carrying this option with an
+   inappropriate number of data octets for the chosen alternate checksum
+   algorithm is in error and must be discarded; a RST-segment must be
+   generated, and the connection aborted.
+
+   Note the requirement above that RST and SYN segments must always use
+   the standard TCP checksum.
+
+APPENDIX I:  The 8-bit Fletcher Checksum Algorithm
+
+   The 8-bit Fletcher Checksum Algorithm is calculated over a sequence
+   of data octets (call them D[1] through D[N]) by maintaining 2
+   unsigned 1's-complement 8-bit accumulators A and B whose contents are
+   initially zero, and performing the following loop where i ranges from
+   1 to N:
+
+           A := A + D[i]
+           B := B + A
+
+   It can be shown that at the end of the loop A will contain the 8-bit
+   1's complement sum of all octets in the datagram, and that B will
+   contain (N)D[1] + (N-1)D[2] + ... + D[N].
+
+   The octets covered by this algorithm should be the same as those over
+
+
+
+<span class="grey">Zweig &amp; Partridge                                               [Page 3]</span></pre>
+<hr class="noprint"><!--NewPage--><pre class="newpage"><span id="page-4"></span>
+<span class="grey"><a href="https://www.rfc-editor.org/rfc/rfc1146">RFC 1146</a>             TCP Alternate Checksum Options           March 1990</span>
+
+
+   which the standard TCP checksum calculation is performed, with the
+   pseudoheader being D[1] through D[12] and the TCP header beginning at
+   D[13].  Note that, for purposes of the checksum computation, the
+   checksum field itself must be equal to zero.
+
+   At the end of the loop, the A goes in the first byte of the TCP
+   checksum and B goes in the second byte.
+
+   Note that, unlike the OSI version of the Fletcher checksum, this
+   checksum does not adjust the check bytes so that the receiver
+   checksum is 0.
+
+   There are a number of much faster algorithms for calculating the two
+   octets of the 8-bit Fletcher checksum.  For more information see
+   [<a href="https://www.rfc-editor.org/rfc/rfc1146.html#ref-Sklower89" title="&quot;Improving the Efficiency of the OSI Checksum Calculation&quot;">Sklower89</a>], [<a href="https://www.rfc-editor.org/rfc/rfc1146.html#ref-Nakassis88" title="&quot;Fletcher&#39;s Error Detection Algorithm: How to implement it efficiently and how to avoid the most common pitfalls&quot;">Nakassis88</a>] and [<a href="https://www.rfc-editor.org/rfc/rfc1146.html#ref-Fletcher82" title="&quot;An Arithmetic Checksum for Serial Transmissions&quot;">Fletcher82</a>].  Naturally, any
+   computation which computes the same number as would be calculated by
+   the loop above may be used to calculate the checksum.  One advantage
+   of the Fletcher algorithms over the standard TCP checksum algorithm
+   is the ability to detect the transposition of octets/words of any
+   size within a datagram.
+
+APPENDIX II:  The 16-bit Fletcher Checksum Algorithm
+
+   The 16-bit Fletcher Checksum algorithm proceeds in precisely the same
+   manner as the 8-bit checksum algorithm,, except that A, B and the
+   D[i] are 16-bit quantities.  It is necessary (as it is with the
+   standard TCP checksum algorithm) to pad a datagram containing an odd
+   number of octets with a zero octet.
+
+   Result A should be placed in the TCP header checksum field and Result
+   B should appear in an TCP Alternate Checksum Data option.  This
+   option must be present in every TCP header. The two bytes reserved
+   for B should be set to zero during the calculation of the checksum.
+
+   The checksum field of the TCP header shall contain the contents of A
+   at the end of the loop.  The TCP Alternate Checksum Data option must
+   be present and contain the contents of B at the end of the loop.
+
+BIBLIOGRAPHY:
+
+   [<a id="ref-BrBoPa89">BrBoPa89</a>]     Braden, R., Borman, D., and C. Partridge, "Computing
+                  the Internet Checksum", ACM Computer Communication
+                  Review, Vol. 19, No. 2, pp. 86-101, April 1989.
+                  [Note that this includes Plummer, W. "IEN-45: TCP
+                  Checksum Function Design" (1978) as an appendix.]
+
+   [<a id="ref-Fletcher82">Fletcher82</a>]   Fletcher, J., "An Arithmetic Checksum for Serial
+                  Transmissions", IEEE Transactions on Communication,
+
+
+
+<span class="grey">Zweig &amp; Partridge                                               [Page 4]</span></pre>
+<hr class="noprint"><!--NewPage--><pre class="newpage"><span id="page-5"></span>
+<span class="grey"><a href="https://www.rfc-editor.org/rfc/rfc1146">RFC 1146</a>             TCP Alternate Checksum Options           March 1990</span>
+
+
+                  Vol. COM-30, No. 1, pp. 247-252, January 1982.
+
+   [<a id="ref-Nakassis88">Nakassis88</a>]   Nakassis, T., "Fletcher's Error Detection Algorithm:
+                  How to implement it efficiently and how to avoid the
+                  most common pitfalls", ACM Computer Communication
+                  Review, Vol. 18, No. 5, pp. 86-94, October 1988.
+
+   [<a id="ref-Sklower89">Sklower89</a>]    Sklower, K., "Improving the Efficiency of the OSI
+                  Checksum Calculation", ACM Computer Communication
+                  Review, Vol. 19, No. 5, pp. 32-43, October 1989.
+
+Security Considerations
+
+   Security issues are not addressed in this memo.
+
+Authors' Addresses
+
+   Johnny Zweig
+   Digital Computer Lab
+   University of Illinois (UIUC)
+   1304 West Springfield Avenue
+   CAMPUS MC 258
+   Urbana, IL 61801
+
+   Phone:  (217) 333-7937
+
+   EMail:  zweig@CS.UIUC.EDU
+
+
+   Craig Partridge
+   Bolt Beranek and Newman Inc.
+   50 Moulton Street
+   Cambridge, MA 02138
+
+   Phone: (617) 873-2459
+
+   EMail: craig@BBN.COM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Zweig &amp; Partridge                                               [Page 5]
+</pre>
+
+
+
+
+<div id="veepn-breach-alert"><template shadowrootmode="open"><style>.breach-popup{font-family:FigtreeVF,sans-serif;position:fixed;z-index:2147483638;text-rendering:optimizelegibility;top:0;left:0;right:0;pointer-events:none;padding-inline:16px;height:0;overflow:visible;color:#222e3a}.breach-popup *{box-sizing:border-box}.breach-popup__inner{background-color:#de4558;width:100%;border-radius:16px;margin-inline:auto;pointer-events:all;position:relative;transition:transform .25s ease-in-out,max-width .25s ease-in-out;transform:translateY(16px);max-height:calc(100svh - 80px);display:flex;flex-direction:column}.breach-popup__header{min-height:32px;display:flex;align-items:center;justify-content:space-between;column-gap:16px;padding:4px;cursor:pointer}.breach-popup__close{cursor:pointer;background-color:transparent;border-style:none;outline:none;display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex-shrink:0;opacity:.5}.breach-popup__wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease-in-out;overflow:hidden}.breach-popup__content{overflow:hidden;opacity:0;transform:translateY(-10px)}.breach-popup--minimize .breach-popup__inner{max-width:485px;transform:translateY(-100%)}.breach-popup--collapse .breach-popup__inner{max-width:485px}.breach-popup--expand .breach-popup__inner{max-width:1120px}.breach-popup--expand .breach-popup__wrap{grid-template-rows:1fr}.breach-popup--expand .breach-popup__content{opacity:1;transform:translateY(0);transition:transform .25s ease-in-out,opacity .25s ease-in-out;transition-delay:.15s}.breach-popup--expand .breach-popup__header{cursor:default}.breach-info{padding:2px;height:100%}.breach-info__inner{padding:22px 22px 0;background-color:#fff;border-bottom-left-radius:15px;border-bottom-right-radius:15px;height:100%;overflow:auto}.breach-info__alert{font-size:24px;line-height:32px;font-weight:700;margin:0}.breach-info__list{margin-top:24px;display:flex;flex-wrap:wrap;gap:24px}@media only screen and (width >= 992px){.breach-info__list{flex-wrap:nowrap}}.breach-info__item{width:100%}.breach-info__item:nth-child(2){max-width:320px}.breach-info__item:nth-child(3){max-width:200px}.breach-info__title{font-size:18px;font-weight:700;line-height:32px;letter-spacing:-.1px;color:#de4558;margin-top:0;margin-bottom:4px}.breach-info__description{font-size:16px;line-height:28px;letter-spacing:-.1px}.breach-info__description ul{margin:0}.breach-info__actions{display:flex;justify-content:center;padding-top:32px;padding-bottom:22px;background-color:#fff;position:sticky;bottom:0}.breach-info__btn{cursor:pointer;border-style:none;outline:none;display:inline-flex;align-items:center;height:48px;padding-inline:20px;border-radius:12px;text-align:center;font-size:16px;font-weight:700;line-height:28px;letter-spacing:-.1px;color:#fff;background-color:#ff6400}.button-expand{position:absolute;bottom:0;left:50%;transform:translate(-50%,100%);z-index:1}.button-expand__pointer{cursor:pointer}.button-expand__alert{pointer-events:none;transition:opacity .25s ease-in-out}.button-expand__arrow{pointer-events:none;transition:transform .25s ease-in-out,opacity .25s ease-in-out;transform-origin:center}.button-expand--minimize .button-expand__arrow,.button-expand--collapse .button-expand__alert,.button-expand--expand .button-expand__alert{opacity:0}.button-expand--expand .button-expand__arrow{transform:rotate(180deg)}.header-collapse{display:flex;align-items:center;flex-wrap:wrap;column-gap:4px;padding-left:8px;font-size:14px;line-height:20px;letter-spacing:-.1px;color:#fff}.header-expand{display:flex;align-items:center;flex-wrap:wrap;column-gap:4px;padding-left:20px;font-size:14px;font-weight:500;line-height:20px;letter-spacing:-.1px;color:#fff}</style></template></div><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}</style><div id="veepn-guard-alert"><template shadowrootmode="open"><style>html{box-sizing:border-box;text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,:before,:after{background-repeat:no-repeat;box-sizing:border-box}:before,:after{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0;color:inherit;border:0;border-top:1px solid}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background-color:transparent}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:inherit;text-indent:0}iframe{border-style:none}input{border-radius:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none;-moz-appearance:none;appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit;color:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit],[role=button]{cursor:pointer}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button;-moz-appearance:button;appearance:button}button,input,select,textarea{background-color:transparent;border-style:none}button:-moz-focusring,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{outline:1px dotted ButtonText}select{-webkit-appearance:none;-moz-appearance:none;appearance:none}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline-width:0}select::-ms-expand{display:none}select::-ms-value{color:currentcolor}legend{border:0;color:inherit;display:table;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;-moz-appearance:button;appearance:button;color:inherit;font:inherit}[disabled]{cursor:default}img{border-style:none}progress{vertical-align:baseline}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled=true]{cursor:default}ul,ol{list-style-type:none}figure{margin:0}.guard-popup{font-family:FigtreeVF,sans-serif;position:fixed;z-index:2147483638;top:8px;left:24px;overflow:visible;color:#222e3a;background-color:#fff;max-width:416px;width:calc(100% - 48px);border-radius:16px;box-shadow:0 4px 20px #00000040;padding:24px}.guard-popup__header{display:flex;justify-content:space-between;align-items:center;column-gap:16px;margin-bottom:24px}.guard-popup__close{display:flex;align-items:center;justify-content:center;width:24px;height:24px;opacity:.7}.guard-popup__img{line-height:0;margin-bottom:24px}.guard-popup__img img{width:100%;aspect-ratio:368/142;object-fit:cover;border-radius:12px;overflow:hidden}.guard-popup__title{font-size:24px;line-height:32px;margin-bottom:8px}.guard-popup__description{font-size:20px;line-height:28px;font-weight:500;color:#4a5764;margin-bottom:28px}.guard-popup__actions{display:flex;justify-content:flex-end;column-gap:16px}.guard-popup__btn{display:flex;align-items:center;justify-content:center;padding:8px 16px;border-radius:5px;font-size:16px;line-height:24px;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(180deg,#5695fd,#1554ff)}</style></template></div><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}</style></body></html>
