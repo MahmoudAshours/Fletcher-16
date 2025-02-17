@@ -81,7 +81,7 @@ func readFile() []byte {
 ## **Example Output**
 If `GameTheory.pdf` exists and is successfully read, the output will be:
 ```sh
-Fletcher checksum , 9f3a
+Fletcher checksum , 1bea
 ```
 (Checksum value will vary based on file content.)
 
