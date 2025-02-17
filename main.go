@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 func main() {
-	s := "test Hello world Hello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello world"
-	byteArr := []byte(s)
+	byteArr := readFile()
 
 	fmt.Printf("Fletcher checksum , %04x\n", fletcher16(byteArr, len(byteArr)))
 }
@@ -21,4 +21,12 @@ func fletcher16(data []uint8, count int) uint16 {
 		b = (b + a) % 255
 	}
 	return (b << 8) | a
+}
+
+func readFile() []byte {
+	data, err := os.ReadFile("GameTheory.pdf")
+	if err != nil {
+		return []byte{}
+	}
+	return data
 }
